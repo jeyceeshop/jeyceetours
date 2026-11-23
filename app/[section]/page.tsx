@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { CountryCards, Intro, Tiers } from "../../components/site";
+import { CountryView } from "../../components/country-view";
 import { Catalog } from "../../components/catalog";
 import { DestinationFilters } from "../../components/destination-filters";
 import { countries, imageFor } from "../../lib/destinations";
@@ -151,6 +152,7 @@ export default async function Page({
   }
   if (!pages[section]) notFound();
   const [title, description] = pages[section];
+  if (section === "panama") return <CountryView country={countries[0]} />;
   return (
     <>
       <Intro
@@ -161,25 +163,18 @@ export default async function Page({
         }
         title={title}
         description={description}
-        image={
-          section === "panama"
-            ? "/images/hero.webp"
-            : section === "america"
-              ? imageFor("colombia")
-              : undefined
-        }
+        image={section === "america" ? imageFor("colombia") : undefined}
       />
       {section === "categorias" && <Tiers showHeading={false} />}
       {section !== "categorias" && (
         <section className="wrap content-section">
-          {section === "destinos" && <CountryCards />}
-          {section === "panama" && <DestinationFilters scope="panama" />}
+          {section === "destinos" && <CountryCards mosaic />}
           {section === "america" && (
             <>
               <CountryCards items={countries.slice(1)} />
               <div className="comparison">
                 <h2>Encuentra tu destino</h2>
-                <DestinationFilters scope="america" />
+                <DestinationFilters />
               </div>
               <div className="comparison">
                 <h2>Itinerarios en América</h2>

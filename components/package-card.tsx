@@ -20,45 +20,46 @@ export function PackageCard({
   selection?: React.ReactNode;
   query?: string;
 }) {
+  const href = "/paquetes/" + item.id;
+  const estimate = planningBudget[item.id];
+  const rate = currentRate(item.verifiedRate);
   return (
-    <article className="package-card">
+    <article className="package-card travel-card">
       <div className="package-picture">
         <Image
           src={packageImages(item)[0] ?? imageFor(item.country)}
           alt=""
           fill
-          sizes="(max-width: 620px) 90vw, 32vw"
+          sizes="(max-width: 640px) 93vw, (max-width: 900px) 45vw, 30vw"
         />
-        <span className="pill">{item.level}</span>
+        <span className={"pill level-" + item.level.toLowerCase()}>
+          {item.level}
+        </span>
+        <span className="picture-duration">
+          <Clock size={14} /> {item.duration}{" "}
+          {item.duration === 1 ? "día" : "días"}
+        </span>
       </div>
       <div className="package-body">
         <div className="locator">
-          <MapPin size={14} />
-          {item.city}, {countryById(item.country)?.name}
+          <MapPin size={14} /> {item.city}, {countryById(item.country)?.name}{" "}
+          <span>· {item.type}</span>
         </div>
         <h3>
-          <Link href={"/paquetes/" + item.id}>{item.title}</Link>
+          <Link href={href}>{item.title}</Link>
         </h3>
-        <p className="row">
-          <Clock size={16} />
-          {item.duration} {item.duration === 1 ? "día" : "días"} <span>·</span>{" "}
-          {item.type}
-        </p>
-        <strong>{rateLabel(item.verifiedRate)}</strong>
-        {!currentRate(item.verifiedRate) && planningBudget[item.id] && (
-          <p>
-            Presupuesto tentativo de ejemplo: {usd(planningBudget[item.id])} por
-            persona. Cargos y servicios por confirmar.
-          </p>
-        )}
-        <p>
-          {item.includes.length
-            ? item.includes.slice(0, 3).join(" · ")
-            : "Servicios por confirmar · Itinerario ilustrativo"}
-        </p>
-        <div className="row package-links">
-          <Link className="button dark" href={"/paquetes/" + item.id}>
-            Ver itinerario <ArrowUpRight size={15} />
+        <p>{item.summary}</p>
+        <div className="package-pricing">
+          <strong>{rateLabel(rate)}</strong>
+          <small>
+            {!rate && estimate
+              ? "Ejemplo: " + usd(estimate) + " por persona"
+              : "Precios y servicios en el itinerario"}
+          </small>
+        </div>
+        <div className="package-links">
+          <Link className="button dark" href={href}>
+            Ver itinerario <ArrowUpRight size={16} />
           </Link>
           <Link
             className="text-link"

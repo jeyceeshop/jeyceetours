@@ -3,156 +3,126 @@ import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
-  CalendarDays,
-  MapPin,
-  Search,
-  Users,
-  Wallet,
   Compass,
+  Mountain,
+  Palmtree,
+  Utensils,
 } from "lucide-react";
-import { CountryCards, Label, Tiers } from "../components/site";
-import { PackageCard } from "../components/package-card";
-import { budgets, countries } from "../lib/destinations";
+import { CountryCards, Label } from "../components/site";
+import { TravelHero } from "../components/travel-hero";
+import { TravelSearch } from "../components/travel-search";
+import { PackageShowcase } from "../components/package-showcase";
+import { countries, imageFor } from "../lib/destinations";
 import { packages } from "../lib/packages";
+
+const interests = [
+  { label: "Playa", icon: Palmtree },
+  { label: "Naturaleza", icon: Mountain },
+  { label: "Cultura", icon: Compass },
+  { label: "Gastronomía", icon: Utensils },
+];
+const featuredIds = [
+  "guna-yala-en-un-dia",
+  "cartagena-tras-las-murallas",
+  "arenal",
+];
+
 export default function Home() {
   return (
     <>
-      <section className="hero">
-        <Image
-          src="/images/hero.webp"
-          alt="Ilustración de un cayo tropical entre aguas turquesa"
-          fill
-          priority
-          sizes="100vw"
-          className="hero-image"
-        />
-        <div className="hero-shade" />
-        <div className="wrap hero-content">
-          <div className="hero-kicker">
-            <Compass size={15} /> VIAJES POR PANAMÁ Y AMÉRICA
-          </div>
-          <h1>
-            El mundo
-            <br />
-            te espera<span>.</span>
-          </h1>
-          <p className="hero-lede">Nosotros te ayudamos a descubrirlo.</p>
-          <p className="hero-description">
-            Explora Panamá y América con experiencias diseñadas para tu
-            presupuesto. De escapadas accesibles a viajes de lujo.
-          </p>
-          <div className="row">
-            <Link href="/destinos" className="button primary">
-              Explorar destinos <ArrowUpRight size={18} />
-            </Link>
-            <Link href="/planifica" className="button glass">
-              Planificar mi viaje <ArrowRight size={17} />
-            </Link>
-          </div>
-        </div>
-        <div className="hero-caption">
-          <MapPin size={14} /> Inspirado en Guna Yala, Panamá
-        </div>
-        <div className="wrap hero-search">
-          <form action="/paquetes" className="search-panel">
-            <label>
-              <MapPin />
-              <span>
-                Destino
-                <select name="pais">
-                  <option value="">¿A dónde vamos?</option>
-                  {countries.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.name}
-                    </option>
-                  ))}
-                </select>
-              </span>
-            </label>
-            <label>
-              <CalendarDays />
-              <span>
-                Fecha aproximada
-                <input aria-label="Fecha aproximada" type="date" name="fecha" />
-              </span>
-            </label>
-            <label>
-              <Users />
-              <span>
-                Viajeros
-                <select name="viajeros" defaultValue="">
-                  <option value="">¿Cuántos viajan?</option>
-                  {Array.from({ length: 10 }, (_, i) => (
-                    <option key={i} value={i + 1}>
-                      {i + 1}
-                    </option>
-                  ))}
-                </select>
-              </span>
-            </label>
-            <label>
-              <Wallet />
-              <span>
-                Presupuesto
-                <select name="presupuesto">
-                  <option value="">Tu rango en USD</option>
-                  {budgets.map((b) => (
-                    <option key={b}>{b}</option>
-                  ))}
-                </select>
-              </span>
-            </label>
-            <button className="button dark">
-              <Search size={18} /> Buscar experiencias
-            </button>
-          </form>
-        </div>
-      </section>
-      <section className="wrap featured" id="destinos">
-        <div className="section-head">
+      <TravelHero />
+      <TravelSearch />
+      <section
+        className="wrap editorial-section home-destinations"
+        id="destinos"
+      >
+        <div className="section-head editorial-head">
           <div>
-            <Label>Encuentra tu próximo destino</Label>
+            <Label>Elige tu destino</Label>
             <h2>
-              Destinos que inspiran<span>.</span>
+              Destinos que <em>inspiran.</em>
             </h2>
-            <p>Tu próxima historia comienza en algún lugar extraordinario.</p>
           </div>
           <Link className="text-link" href="/destinos">
-            Ver todos los destinos <ArrowRight size={18} />
+            Ver todos los destinos <ArrowUpRight size={18} />
           </Link>
         </div>
-        <CountryCards />
+        <CountryCards mosaic />
       </section>
-      <section className="package-section">
+      <section className="showcase editorial-section">
         <div className="wrap">
-          <div className="section-head">
+          <div className="section-head editorial-head">
             <div>
-              <Label>Ideas para tu próxima aventura</Label>
+              <Label>Encuentra tu próxima ruta</Label>
               <h2>
-                Explora nuestros paquetes<span>.</span>
+                Viajes para <em>recordar.</em>
               </h2>
-              <p>Encuentra itinerarios ilustrativos en Panamá y América.</p>
+              <p>
+                Explora ideas de itinerario, desde una excursión hasta varios
+                días de aventura.
+              </p>
             </div>
             <Link className="text-link" href="/paquetes">
-              Ver todos los paquetes <ArrowRight size={18} />
+              Ver todos los paquetes <ArrowUpRight size={18} />
             </Link>
           </div>
-          <div className="three-grid">
-            {packages.slice(0, 3).map((item) => (
-              <PackageCard key={item.id} item={item} />
-            ))}
-          </div>
+          <PackageShowcase
+            featured={featuredIds.flatMap((id) =>
+              packages.filter((item) => item.id === id),
+            )}
+            options={countries.map(({ id, name }) => ({
+              id,
+              label: name,
+              items: packages.filter((item) => item.country === id).slice(0, 3),
+            }))}
+          />
         </div>
       </section>
-      <Tiers />
-      <section className="wrap last-cta">
-        <div>
-          <Label>Tu viaje, tus preferencias</Label>
-          <h2>Diseña tu próxima aventura.</h2>
+      <section className="wrap editorial-section">
+        <div className="editorial-head">
+          <Label>Experiencias</Label>
+          <h2>
+            ¿Qué te gustaría <em>hacer?</em>
+          </h2>
         </div>
-        <Link className="button primary" href="/planifica">
-          Planifica tu viaje <ArrowUpRight size={18} />
-        </Link>
+        <div className="interest-grid">
+          {interests.map(({ label, icon: Icon }) => (
+            <Link
+              href={"/paquetes?tipo=" + encodeURIComponent(label)}
+              key={label}
+            >
+              <Icon size={25} strokeWidth={1.5} />
+              <span>{label}</span>
+              <ArrowUpRight size={17} />
+            </Link>
+          ))}
+        </div>
+        <div className="planning-feature">
+          <div className="planning-photo">
+            <Image
+              src={imageFor("mexico")}
+              alt=""
+              fill
+              sizes="(max-width: 650px) 95vw, 49vw"
+            />
+          </div>
+          <div className="planning-copy editorial-head">
+            <Label>Viaja a tu manera</Label>
+            <h2>
+              Un viaje <em>hecho para ti.</em>
+            </h2>
+            <p>
+              Cuéntanos qué lugar tienes en mente, con quién viajas y cuánto
+              quieres gastar.
+            </p>
+            <Link className="button primary" href="/planifica">
+              Diseñar mi viaje <ArrowRight size={17} />
+            </Link>
+            <Link className="text-link" href="/categorias">
+              Conoce Essential, Plus y Signature <ArrowUpRight size={16} />
+            </Link>
+          </div>
+        </div>
       </section>
     </>
   );

@@ -21,10 +21,11 @@ export default async function Page({
     <>
       <Intro
         label="Catálogo de viajes"
+        image="/images/guanacaste.webp"
         title="Explora nuestros paquetes"
         description="Recorre ideas de viaje por Panamá y América. Los itinerarios de esta etapa son ilustrativos y las tarifas están sujetas a cotización."
       />
-      <Catalog initial={fields} />
+      <Catalog key={JSON.stringify(fields)} initial={fields} />
     </>
   );
 }

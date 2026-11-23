@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight } from "lucide-react";
-import { Intro } from "../../../components/site";
+import { ArrowDown, ArrowRight, Clock, MapPin, Route } from "lucide-react";
+import { Intro, Label } from "../../../components/site";
 import { Flyer } from "../../../components/flyer";
 import { countryById } from "../../../lib/destinations";
 import {
@@ -26,11 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const item = packages.find((p) => p.id === id);
   return {
     title: item?.title,
-    description: item
-      ? "Explora este itinerario en " +
-        item.city +
-        ", consulta sus detalles y registra tu interés."
-      : undefined,
+    description: item?.summary,
   };
 }
 export default async function Page({ params }: Props) {
@@ -38,6 +34,10 @@ export default async function Page({ params }: Props) {
   const p = packages.find((item) => item.id === id);
   if (!p) notFound();
   const images = packageImages(p);
+  const country = countryById(p.country);
+  const countryPath =
+    p.country === "panama" ? "/panama" : "/america/" + p.country;
+  const contactPath = "/planifica?paquete=" + p.id;
   const rate = currentRate(p.verifiedRate);
   const conditions = [
     ["Operador", p.operator],
@@ -50,19 +50,58 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <Intro
-        label={p.city + " · " + countryById(p.country)?.name}
+        label={p.city + " · " + country?.name}
         title={p.title}
-        description={example}
+        description={p.summary}
         image={images[0]}
-      />
-      <section className="wrap content-section detail-grid">
+      >
+        <div className="row intro-actions">
+          <Link className="button primary" href={contactPath}>
+            Solicitar mi itinerario <ArrowRight size={16} />
+          </Link>
+          <a className="button glass" href="#ruta">
+            Ver recorrido <ArrowDown size={16} />
+          </a>
+        </div>
+      </Intro>
+      <div className="wrap package-facts">
+        <div>
+          <MapPin size={19} />
+          <span>
+            <small>Salida orientativa</small>
+            {p.departure}
+          </span>
+        </div>
+        <div>
+          <Clock size={19} />
+          <span>
+            <small>Duración</small>
+            {p.duration} {p.duration === 1 ? "día" : "días"}
+          </span>
+        </div>
+        <div>
+          <Route size={19} />
+          <span>
+            <small>Experiencia</small>
+            {p.type}
+          </span>
+        </div>
+        <Link className="text-link" href={countryPath + "#paquetes-del-pais"}>
+          Más rutas en {country?.name} <ArrowRight size={16} />
+        </Link>
+      </div>
+      <section
+        id="ruta"
+        className="wrap content-section detail-grid package-detail"
+      >
         <div className="stack">
-          <article className="panel">
-            <h2>Itinerario ilustrativo</h2>
+          <article className="panel route-panel">
+            <Label>{example}</Label>
+            <h2>Tu recorrido</h2>
             <ol className="timeline">
               {p.itinerary.map((line, i) => (
                 <li key={line}>
-                  <strong>
+                  <strong className="route-step">
                     {p.duration === 1 ? "Etapa" : "Día"} {i + 1}
                   </strong>
                   <p>{line}</p>
@@ -130,8 +169,10 @@ export default async function Page({ params }: Props) {
           </article>
         </div>
         <aside className="stack">
-          <div className="panel">
-            <span className="pill">{p.level}</span>
+          <div className="panel itinerary-summary">
+            <span className={"pill level-" + p.level.toLowerCase()}>
+              {p.level}
+            </span>
             <h2>{rateLabel(rate)}</h2>
             {!rate && (
               <p>
@@ -162,16 +203,9 @@ export default async function Page({ params }: Props) {
               . Cargos obligatorios: {rate?.mandatoryCharges || "por confirmar"}
               .
             </p>
-            <p>
-              {p.duration} {p.duration === 1 ? "día" : "días"} · {p.type}
-            </p>
-            <p>Salida orientativa: {p.departure}</p>
             <p>Fechas: {p.dates?.join(", ") || "por confirmar"}</p>
             <p>Ocupación: {p.occupancy || "por confirmar"}</p>
-            <Link
-              className="button primary"
-              href={"/planifica?paquete=" + p.id}
-            >
+            <Link className="button primary" href={contactPath}>
               Solicitar mi itinerario <ArrowRight size={16} />
             </Link>
           </div>

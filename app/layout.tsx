@@ -3,7 +3,10 @@ import { Header, Footer } from "../components/site";
 import { brand } from "../lib/brand";
 import "@fontsource-variable/dm-sans";
 import "@fontsource-variable/manrope";
+import "@fontsource/instrument-serif/latin-400.css";
+import "@fontsource/instrument-serif/latin-400-italic.css";
 import "./globals.css";
+import "./editorial.css";
 
 const description =
   "Descubre destinos de Panamá y América, explora itinerarios y planifica tu próximo viaje con Jey Cee Tours.";
@@ -19,7 +22,7 @@ export const metadata: Metadata = {
     description,
     locale: "es_PA",
     type: "website",
-    images: brand.site ? ["/images/hero.webp"] : undefined,
+    images: brand.site ? ["/images/hero-guna-yala.webp"] : undefined,
   },
 };
 export default function RootLayout({

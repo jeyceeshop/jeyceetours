@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Intro } from "../../../components/site";
+import { CountryView } from "../../../components/country-view";
+import { PackageCard } from "../../../components/package-card";
+import { packages } from "../../../lib/packages";
+import { Intro, Label } from "../../../components/site";
 import {
   countries,
   countryById,
   destinations,
-  imageFor,
   guideFor,
   destinationArtwork,
 } from "../../../lib/destinations";
@@ -46,40 +48,12 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       ? countryById(p.slug)
       : undefined;
   if (!place && !country) notFound();
-  if (country)
-    return (
-      <>
-        <Intro
-          label="Explora América"
-          title={country.name}
-          description={country.description}
-          image={imageFor(country.id)}
-        />
-        <section className="wrap content-section">
-          <h2>Destinos en {country.name}</h2>
-          <div className="three-grid">
-            {destinations
-              .filter((d) => d.country === country.id)
-              .map((d) => (
-                <article key={d.id} className="panel">
-                  <h3>{d.name}</h3>
-                  <p>{d.description}</p>
-                  <Link className="text-link" href={"/america/" + d.id}>
-                    Explorar destino <ArrowRight size={16} />
-                  </Link>
-                </article>
-              ))}
-          </div>
-          <p>
-            <Link className="text-link" href={"/paquetes?pais=" + country.id}>
-              Ver itinerarios relacionados <ArrowRight size={16} />
-            </Link>
-          </p>
-        </section>
-      </>
-    );
+  if (country) return <CountryView country={country} />;
   if (!place) notFound();
   const [attractions, activities, route] = guideFor(place.id);
+  const related = packages.filter((item) => item.places.includes(place.id));
+  const countryPath =
+    place.country === "panama" ? "/panama" : "/america/" + place.country;
   return (
     <>
       <Intro
@@ -91,7 +65,18 @@ export default async function Page({ params }: { params: Promise<Params> }) {
             ? "/images/" + destinationArtwork[place.id] + ".webp"
             : undefined
         }
-      />
+      >
+        <div className="row intro-actions">
+          {related.length > 0 && (
+            <a href="#paquetes-relacionados" className="button primary">
+              Ver paquetes <ArrowRight size={16} />
+            </a>
+          )}
+          <Link className="button glass" href={countryPath}>
+            Volver al país
+          </Link>
+        </div>
+      </Intro>
       <section className="wrap content-section detail-grid">
         <div className="stack">
           <article className="panel">
@@ -120,6 +105,34 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           </Link>
         </aside>
       </section>
+      {related.length > 0 && (
+        <section
+          className="country-guides editorial-section"
+          id="paquetes-relacionados"
+        >
+          <div className="wrap">
+            <div className="section-head editorial-head">
+              <div>
+                <Label>Paquetes e itinerarios</Label>
+                <h2>
+                  Rutas para <em>tu viaje.</em>
+                </h2>
+              </div>
+              <Link
+                href={countryPath + "#paquetes-del-pais"}
+                className="text-link"
+              >
+                Ver rutas del país <ArrowRight size={17} />
+              </Link>
+            </div>
+            <div className="three-grid">
+              {related.map((item) => (
+                <PackageCard item={item} key={item.id} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </>
   );
 }

@@ -2,30 +2,35 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
-import {
-  countries,
-  countryById,
-  destinations,
-  interests,
-} from "../lib/destinations";
-export function DestinationFilters({ scope }: { scope: "panama" | "america" }) {
+import { countries, destinations, interests } from "../lib/destinations";
+import { PlaceCard } from "./place-card";
+export function DestinationFilters({ countryId }: { countryId?: string }) {
   const [country, setCountry] = useState("");
   const [interest, setInterest] = useState("");
-  const results = destinations.filter(
-    (d) =>
-      (scope === "panama" ? d.country === "panama" : d.country !== "panama") &&
-      (!country || d.country === country) &&
-      (!interest || d.types.includes(interest)),
+  const places = destinations.filter((place) =>
+    countryId
+      ? place.country === countryId
+      : place.country !== "panama" && (!country || place.country === country),
+  );
+  const availableInterests = interests.filter((type) =>
+    places.some((place) => place.types.includes(type)),
+  );
+  const results = places.filter(
+    (place) => !interest || place.types.includes(interest),
   );
   return (
     <>
       <div className="filter-grid">
-        {scope === "america" && (
+        {!countryId && (
           <label>
             País
             <select
+              aria-label="País de la guía"
               value={country}
-              onChange={(e) => setCountry(e.target.value)}
+              onChange={(e) => {
+                setCountry(e.target.value);
+                setInterest("");
+              }}
             >
               <option value="">Todos</option>
               {countries.slice(1).map((c) => (
@@ -39,36 +44,30 @@ export function DestinationFilters({ scope }: { scope: "panama" | "america" }) {
         <label>
           Tipo de experiencia
           <select
+            aria-label="Tipo de experiencia en las guías"
             value={interest}
             onChange={(e) => setInterest(e.target.value)}
           >
             <option value="">Todas</option>
-            {interests.map((i) => (
+            {availableInterests.map((i) => (
               <option key={i}>{i}</option>
             ))}
           </select>
         </label>
       </div>
-      <p role="status">{results.length} destinos</p>
+      <p role="status">
+        {results.length} {results.length === 1 ? "destino" : "destinos"}
+      </p>
       {results.length ? (
         <div className="three-grid">
           {results.map((d) => (
-            <article key={d.id} className="panel">
-              <div className="locator">
-                {countryById(d.country)?.name} · {d.types.join(" · ")}
-              </div>
-              <h3>{d.name}</h3>
-              <p>{d.description}</p>
-              <Link className="text-link" href={"/" + scope + "/" + d.id}>
-                Explorar destino <ArrowRight size={15} />
-              </Link>
-            </article>
+            <PlaceCard key={d.id} place={d} />
           ))}
         </div>
       ) : (
         <p className="notice">No hay destinos que coincidan con tus filtros.</p>
       )}
-      {scope === "america" && (
+      {!countryId && (
         <p>
           <Link className="text-link" href="/paquetes?alcance=internacional">
             Filtrar itinerarios por duración, presupuesto y categoría{" "}

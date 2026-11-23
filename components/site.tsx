@@ -7,7 +7,9 @@ import {
   Globe2,
   MapPin,
   MoveUpRight,
+  ChevronDown,
 } from "lucide-react";
+import { packages } from "../lib/packages";
 import { MobileNav } from "./mobile-nav";
 import { brand, nav } from "../lib/brand";
 import { countries, imageFor } from "../lib/destinations";
@@ -37,11 +39,22 @@ export function Header() {
       <div className="header-inner">
         <Logo />
         <nav className="desktop-nav" aria-label="Principal">
-          {nav.map(([label, href]) => (
-            <Link href={href} key={href}>
-              {label}
+          <Link href="/">Inicio</Link>
+          <div className="nav-destinations">
+            <Link href="/destinos">
+              Destinos <ChevronDown size={14} />
             </Link>
-          ))}
+            <div className="nav-disclosure">
+              <Link href="/destinos">Todos los destinos</Link>
+              <Link href="/panama">Explora Panamá</Link>
+              <Link href="/america">Explora América</Link>
+            </div>
+          </div>
+          <Link href="/paquetes">Paquetes</Link>
+          <Link href="/experiencias">Experiencias</Link>
+          <Link href="/categorias">Categorías</Link>
+          <Link href="/nosotros">Nosotros</Link>
+          <Link href="/contacto">Contacto</Link>
         </nav>
         <Link className="button primary header-cta" href="/planifica">
           Planifica tu viaje <MoveUpRight size={15} />
@@ -106,11 +119,13 @@ export function Label({ children }: { children: React.ReactNode }) {
 }
 export function CountryCards({
   items = countries,
+  mosaic = false,
 }: {
   items?: typeof countries;
+  mosaic?: boolean;
 }) {
   return (
-    <div className="country-grid">
+    <div className={mosaic ? "country-grid country-mosaic" : "country-grid"}>
       {items.map((country) => (
         <Link
           className="country-card"
@@ -121,18 +136,21 @@ export function CountryCards({
             src={imageFor(country.id)}
             alt=""
             fill
-            sizes="(max-width: 620px) 90vw, 32vw"
+            sizes="(max-width: 640px) 93vw, (max-width: 900px) 45vw, 40vw"
           />
           <div className="card-overlay" />
           <div className="country-info">
             <div className="locator">
               <MapPin size={13} />
-              {country.regions}
+              {
+                packages.filter((item) => item.country === country.id).length
+              }{" "}
+              itinerarios
             </div>
             <h3>{country.name}</h3>
-            <p>{country.description}</p>
+            <p>{country.regions}</p>
             <span className="card-action">
-              Explorar destino <ArrowRight size={16} />
+              Explorar <MoveUpRight size={16} />
             </span>
           </div>
         </Link>
@@ -145,14 +163,20 @@ export function Intro({
   title,
   description,
   image,
+  children,
 }: {
   label: string;
   title: string;
   description: string;
   image?: string;
+  children?: React.ReactNode;
 }) {
   return (
-    <section className={image ? "intro photo-intro" : "intro"}>
+    <section
+      className={
+        image ? "intro photo-intro editorial-intro" : "intro editorial-intro"
+      }
+    >
       {image && (
         <>
           <Image src={image} alt="" fill priority sizes="100vw" />
@@ -163,6 +187,7 @@ export function Intro({
         <Label>{label}</Label>
         <h1>{title}</h1>
         <p>{description}</p>
+        {children}
       </div>
     </section>
   );
