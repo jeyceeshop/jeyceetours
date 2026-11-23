@@ -1,0 +1,27 @@
+{
+  "providers": [],
+  "offers": [
+    {
+      "id": "plantilla",
+      "provider": null,
+      "package": null,
+      "url": null,
+      "checked": null,
+      "originalPrice": null,
+      "originalCurrency": null,
+      "usdPrice": null,
+      "conversionSource": null,
+      "travelDate": null,
+      "departure": null,
+      "durationDays": null,
+      "included": [],
+      "excluded": [],
+      "conditions": null,
+      "occupancy": null,
+      "validThrough": null,
+      "availability": null,
+      "status": "pending"
+    }
+  ],
+  "confidentialRates": []
+}

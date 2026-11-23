@@ -1,0 +1,41 @@
+[
+  {
+    "provider": "Turismo Local Medellín",
+    "url": "https://turismolocalmedellin.com/",
+    "country": "Colombia",
+    "checked": "2026-11-23",
+    "status": "pending",
+    "observation": "El proxy rechazó la conexión (403)."
+  },
+  {
+    "provider": "Tours Guatapé",
+    "url": "https://toursguatape.com/",
+    "country": "Colombia",
+    "checked": "2026-11-23",
+    "status": "pending",
+    "observation": "El proxy rechazó la conexión (403)."
+  },
+  {
+    "provider": "Mi Tiquete Online",
+    "url": "https://mitiqueteonline.com/Planes/medellin/medellin-4dias",
+    "country": "Colombia",
+    "checked": "2026-11-23",
+    "status": "pending",
+    "observation": "El proxy rechazó la conexión (403)."
+  },
+  {
+    "provider": "Panamayostours",
+    "url": "https://panamayostours.com/store/medellin-4-dias-3-noches",
+    "country": "Panamá",
+    "checked": "2026-11-23",
+    "status": "pending",
+    "observation": "El proxy rechazó la conexión (403)."
+  },
+  {
+    "provider": "CAMF Travel",
+    "url": "https://www.camftravel.com/es/packages",
+    "checked": "2026-11-23",
+    "status": "pending",
+    "observation": "El proxy rechazó la conexión (403)."
+  }
+]
