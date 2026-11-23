@@ -17,7 +17,6 @@ export type Package = {
   level: string;
   type: string;
   departure: string;
-  itinerary: string[];
   includes: string[];
   excludes: string[];
   verifiedRate?: Rate;
@@ -51,11 +50,6 @@ export const packages: Package[] = [
     level: "Essential",
     type: "Playa",
     departure: "Ciudad de Panamá",
-    itinerary: [
-      "Salida hacia la costa de Guna Yala.",
-      "Recorrido entre islas y tiempo en la playa.",
-      "Regreso a Ciudad de Panamá.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -71,11 +65,6 @@ export const packages: Package[] = [
     level: "Essential",
     type: "Cultura",
     departure: "Medellín",
-    itinerary: [
-      "Ruta panorámica hacia el oriente antioqueño.",
-      "Visita a la zona de la Piedra del Peñol.",
-      "Recorrido por las calles y zócalos de Guatapé.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -90,11 +79,6 @@ export const packages: Package[] = [
     level: "Essential",
     type: "Cultura",
     departure: "Medellín",
-    itinerary: [
-      "Encuentro en Medellín.",
-      "Caminata editorial entre murales y espacios culturales.",
-      "Tiempo para explorar la gastronomía del sector.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -109,12 +93,6 @@ export const packages: Package[] = [
     level: "Plus",
     type: "Aventura",
     departure: "Cancún",
-    itinerary: [
-      "Llegada y tiempo para explorar la costa.",
-      "Visita a un cenote con acceso autorizado.",
-      "Día de playa y gastronomía local.",
-      "Regreso a Cancún.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -130,11 +108,6 @@ export const packages: Package[] = [
     level: "Plus",
     type: "Naturaleza",
     departure: "San José",
-    itinerary: [
-      "Traslado hacia La Fortuna.",
-      "Senderos de Arenal y descanso en aguas termales.",
-      "Regreso al Valle Central.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -149,12 +122,6 @@ export const packages: Package[] = [
     level: "Signature",
     type: "Descanso",
     departure: "Punta Cana",
-    itinerary: [
-      "Llegada a Punta Cana.",
-      "Día de playa.",
-      "Tiempo libre en la costa.",
-      "Regreso.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -170,11 +137,6 @@ export const packages: Package[] = [
     level: "Plus",
     type: "Playa",
     departure: "Isla Colón",
-    itinerary: [
-      "Recorre el pueblo de Bocas y la costa de Isla Colón.",
-      "Dedica el día a Bastimentos con un traslado marítimo según las condiciones del mar.",
-      "Reserva la mañana para la playa y regresa a Isla Colón.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -190,10 +152,6 @@ export const packages: Package[] = [
     level: "Essential",
     type: "Naturaleza",
     departure: "David",
-    itinerary: [
-      "Llega a Boquete y explora las fincas de café y el centro del pueblo.",
-      "Camina por un sendero habilitado y regresa a David.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -209,11 +167,6 @@ export const packages: Package[] = [
     level: "Essential",
     type: "Cultura",
     departure: "Ciudad de Panamá",
-    itinerary: [
-      "Empieza el día en las plazas del Casco Antiguo.",
-      "Haz una pausa para conocer la cocina panameña.",
-      "Continúa hacia el centro de visitantes de Miraflores, según horario.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -228,11 +181,6 @@ export const packages: Package[] = [
     level: "Plus",
     type: "Cultura",
     departure: "Cartagena",
-    itinerary: [
-      "Explora a pie el centro amurallado.",
-      "Reserva la mañana para el Castillo de San Felipe y la tarde para Getsemaní.",
-      "Despídete de la ciudad con una caminata por las murallas.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -248,10 +196,6 @@ export const packages: Package[] = [
     level: "Essential",
     type: "Gastronomía",
     departure: "Bogotá",
-    itinerary: [
-      "Recorre La Candelaria y visita un museo según su horario.",
-      "Prueba la cocina local en un mercado y pasea por el centro.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -266,11 +210,6 @@ export const packages: Package[] = [
     level: "Plus",
     type: "Playa",
     departure: "San Andrés",
-    itinerary: [
-      "Explora la costa de Spratt Bight.",
-      "Recorre los miradores y las zonas de baño habilitadas en la costa occidental.",
-      "Deja la mañana libre antes del regreso.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -285,11 +224,6 @@ export const packages: Package[] = [
     level: "Essential",
     type: "Gastronomía",
     departure: "Ciudad de México",
-    itinerary: [
-      "Pasea por el Centro Histórico y planea una visita a Bellas Artes.",
-      "Explora el bosque de Chapultepec y elige un museo.",
-      "Visita un mercado y reserva tiempo para disfrutar de sus cocinas.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -304,11 +238,6 @@ export const packages: Package[] = [
     level: "Plus",
     type: "Viajes familiares",
     departure: "Cancún",
-    itinerary: [
-      "Llega a Cancún y recorre la zona de playa.",
-      "Dedica la mañana a la costa y consulta opciones de paseo por la laguna Nichupté.",
-      "Disfruta una mañana tranquila antes de partir.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -323,12 +252,6 @@ export const packages: Package[] = [
     level: "Plus",
     type: "Naturaleza",
     departure: "Liberia",
-    itinerary: [
-      "Llega a Liberia y continúa hacia la costa.",
-      "Visita una playa del Pacífico y revisa las condiciones de baño.",
-      "Dedica el día a los senderos habilitados de Rincón de la Vieja.",
-      "Regresa a Liberia tras una mañana libre.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -343,10 +266,6 @@ export const packages: Package[] = [
     level: "Essential",
     type: "Cultura",
     departure: "San José",
-    itinerary: [
-      "Recorre el centro y visita el Mercado Central.",
-      "Visita el Teatro Nacional y un museo cercano según sus horarios.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -362,10 +281,6 @@ export const packages: Package[] = [
     level: "Essential",
     type: "Cultura",
     departure: "Santo Domingo",
-    itinerary: [
-      "Explora el Parque Colón y las calles históricas del centro.",
-      "Visita los museos abiertos y recorre el paseo junto al río Ozama.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -381,10 +296,6 @@ export const packages: Package[] = [
     level: "Plus",
     type: "Playa",
     departure: "Punta Cana",
-    itinerary: [
-      "Dedica la tarde a la playa de Bávaro.",
-      "Recorre la costa hacia Macao y elige zonas de baño seguras.",
-    ],
     includes: [],
     excludes: [],
   },
@@ -406,19 +317,18 @@ export function rateLabel(rate?: Rate) {
     ? usd(active.amount) + " por " + active.unit
     : "Consultar precio";
 }
-export const example = "Itinerario ilustrativo · Registro de interés";
 
 const artwork: Record<string, string[]> = {
-  "guna-yala-en-un-dia": ["hero", "panama"],
+  "guna-yala-en-un-dia": ["hero-guna-yala", "panama"],
   "guatape-y-piedra-del-penol": ["guatape", "guatape-street"],
   "comuna-13": ["comuna-13"],
   "riviera-maya": ["mexico", "cancun"],
   arenal: ["costa-rica", "arenal-forest"],
-  "punta-cana": ["republica-dominicana"],
+  "punta-cana": ["republica-dominicana", "republica-dominicana-vista"],
   "bocas-entre-islas": ["bocas"],
   "cafes-y-senderos-de-boquete": ["boquete"],
   "casco-y-canal": ["capital"],
-  "cartagena-tras-las-murallas": ["colombia"],
+  "cartagena-tras-las-murallas": ["colombia", "colombia-vista"],
   "bogota-arte-y-mercados": ["bogota"],
   "san-andres-tonos-de-azul": ["san-andres"],
   "cdmx-arte-y-sabores": ["ciudad-de-mexico"],
@@ -426,7 +336,10 @@ const artwork: Record<string, string[]> = {
   "guanacaste-entre-bosque-y-mar": ["guanacaste"],
   "san-jose-cultural": ["san-jose"],
   "santo-domingo-colonial": ["santo-domingo"],
-  "playas-de-punta-cana": ["republica-dominicana"],
+  "playas-de-punta-cana": [
+    "republica-dominicana-vista",
+    "republica-dominicana",
+  ],
 };
 export const packageImages = (p: Package) =>
   (artwork[p.id] ?? []).map((id) => "/images/" + id + ".webp");

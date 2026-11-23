@@ -7,6 +7,8 @@ import "@fontsource/instrument-serif/latin-400.css";
 import "@fontsource/instrument-serif/latin-400-italic.css";
 import "./globals.css";
 import "./editorial.css";
+import "./header.css";
+import "./tours.css";
 
 const description =
   "Descubre destinos de Panamá y América, explora itinerarios y planifica tu próximo viaje con Jey Cee Tours.";

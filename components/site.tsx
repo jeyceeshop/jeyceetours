@@ -7,9 +7,9 @@ import {
   Globe2,
   MapPin,
   MoveUpRight,
-  ChevronDown,
 } from "lucide-react";
 import { packages } from "../lib/packages";
+import { DestinationsMenu } from "./destinations-menu";
 import { MobileNav } from "./mobile-nav";
 import { brand, nav } from "../lib/brand";
 import { countries, imageFor } from "../lib/destinations";
@@ -36,25 +36,31 @@ export function Logo() {
 export function Header() {
   return (
     <header className="header">
-      <div className="header-inner">
+      <div className="header-companion">
+        <div className="header-shell">
+          <Link href="/destinos">
+            <Globe2 size={13} /> Panamá y América
+          </Link>
+          <Link href="/contacto">
+            Atención personalizada <MoveUpRight size={12} />
+          </Link>
+        </div>
+      </div>
+      <div className="header-inner header-shell">
         <Logo />
         <nav className="desktop-nav" aria-label="Principal">
           <Link href="/">Inicio</Link>
-          <div className="nav-destinations">
-            <Link href="/destinos">
-              Destinos <ChevronDown size={14} />
-            </Link>
-            <div className="nav-disclosure">
-              <Link href="/destinos">Todos los destinos</Link>
-              <Link href="/panama">Explora Panamá</Link>
-              <Link href="/america">Explora América</Link>
-            </div>
-          </div>
+          <DestinationsMenu
+            destinations={countries.map(({ id, name }) => ({
+              label: name,
+              href: id === "panama" ? "/panama" : "/america/" + id,
+              count: packages.filter((item) => item.country === id).length,
+            }))}
+          />
           <Link href="/paquetes">Paquetes</Link>
           <Link href="/experiencias">Experiencias</Link>
           <Link href="/categorias">Categorías</Link>
           <Link href="/nosotros">Nosotros</Link>
-          <Link href="/contacto">Contacto</Link>
         </nav>
         <Link className="button primary header-cta" href="/planifica">
           Planifica tu viaje <MoveUpRight size={15} />
@@ -179,7 +185,7 @@ export function Intro({
     >
       {image && (
         <>
-          <Image src={image} alt="" fill priority sizes="100vw" />
+          <Image src={image} alt="" fill priority sizes="100vw" quality={85} />
           <div className="intro-shade" />
         </>
       )}

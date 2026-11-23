@@ -1,0 +1,199 @@
+.tour-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 17px;
+}
+.tour-jumps a {
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  color: var(--teal);
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 750;
+}
+.tour-jumps a:hover {
+  background: #e7ecda;
+}
+.package-detail {
+  padding-top: 24px;
+}
+.package-detail .tour-panel {
+  background: #fffefa;
+  padding: clamp(17px, 3.8vw, 39px);
+}
+.package-detail .tour-panel h2 {
+  font: 400 clamp(40px, 5.2vw, 63px)/0.94 var(--display);
+}
+.package-detail .tour-panel h3 {
+  font-size: clamp(17px, 2vw, 24px);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+.tour-endpoints {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-block: 22px;
+}
+.tour-endpoints > div {
+  display: flex;
+  gap: 8px;
+  border-radius: 9px;
+  background: #f3f0e5;
+  padding: 12px;
+  color: var(--secondary);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.tour-endpoints strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.tour-endpoints svg,
+.tour-bring svg {
+  flex: none;
+  color: var(--teal);
+}
+.package-detail .timeline > li {
+  padding-bottom: 18px;
+}
+.package-detail .timeline > li:last-child {
+  padding-bottom: 1px;
+}
+.route-step {
+  margin-bottom: 4px;
+}
+.content-section .tour-stops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 9px 0 3px;
+}
+.package-detail .timeline .tour-stops li {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 0;
+  font-size: 11px;
+  font-weight: 750;
+  color: #254f43;
+  padding: 4px 7px;
+  background: #ecf1e3;
+  border-radius: 5px;
+}
+.package-detail .timeline .tour-stops li::before {
+  display: none;
+}
+.tour-stops svg {
+  flex: none;
+}
+.tour-services {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 19px;
+}
+.tour-services > div {
+  background: #eef2e6;
+  border-radius: 11px;
+  padding: 14px;
+}
+.tour-services > div + div {
+  background: #f4efe3;
+}
+.tour-services ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  display: grid;
+  gap: 9px;
+}
+.tour-services li,
+.tour-bring {
+  display: flex;
+  align-items: start;
+  gap: 8px;
+  font-size: 14px;
+}
+.tour-services li svg {
+  flex: none;
+  margin-top: 3px;
+  color: var(--teal);
+}
+.tour-verified {
+  margin-top: 15px;
+}
+.tour-gallery figure {
+  height: auto;
+  aspect-ratio: 1.5;
+}
+.tour-gallery-single {
+  grid-template-columns: 1fr;
+}
+.tour-gallery-single figure {
+  aspect-ratio: 1.9;
+}
+.tour-gallery figcaption {
+  background: #102a2ae8;
+}
+.tour-terms {
+  margin-top: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: 11px;
+}
+.tour-terms summary {
+  cursor: pointer;
+  font-weight: 750;
+  color: var(--teal);
+}
+.tour-terms dl,
+.tour-quote {
+  margin-block: 12px;
+}
+.tour-terms dl div,
+.tour-quote div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+.tour-terms dt,
+.tour-quote dt {
+  font-weight: 750;
+}
+.tour-terms dd,
+.tour-quote dd {
+  text-align: right;
+  color: var(--secondary);
+}
+.itinerary-summary .tour-interest {
+  text-align: center;
+  margin: 6px 0 0;
+  font-size: 12px;
+}
+@media (min-width: 1000px) {
+  .itinerary-summary {
+    position: sticky;
+    top: 125px;
+  }
+}
+@media (max-width: 650px) {
+  .tour-jumps {
+    gap: 5px;
+  }
+  .tour-jumps a {
+    padding: 6px 9px;
+    font-size: 11px;
+  }
+  .tour-endpoints,
+  .tour-services {
+    grid-template-columns: 1fr;
+  }
+}

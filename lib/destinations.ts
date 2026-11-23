@@ -297,7 +297,7 @@ const guides: Record<string, [string, string, string]> = {
 };
 export const guideFor = (id: string) => guides[id];
 export const destinationArtwork: Record<string, string> = {
-  "guna-yala": "hero",
+  "guna-yala": "hero-guna-yala",
   "bocas-del-toro": "bocas",
   boquete: "boquete",
   chiriqui: "boquete",

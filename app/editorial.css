@@ -13,52 +13,8 @@
 html {
   scroll-padding-top: 100px;
 }
-.header {
-  background: #fcfaf5;
-}
-.header-inner {
-  min-height: 78px;
-}
 .logo-mark {
   background: #e8edda;
-}
-.desktop-nav {
-  gap: clamp(16px, 2vw, 32px);
-}
-.desktop-nav a {
-  white-space: nowrap;
-}
-.nav-destinations {
-  position: relative;
-}
-.nav-destinations > a {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.nav-disclosure {
-  position: absolute;
-  display: none;
-  min-width: 190px;
-  left: -16px;
-  top: 100%;
-  border-radius: 0 0 12px 12px;
-  background: #fcfaf5;
-  box-shadow: 0 16px 23px #10282b20;
-  padding: 15px 16px;
-  z-index: 2;
-}
-.nav-disclosure a {
-  display: block;
-  padding: 8px 0;
-}
-.nav-destinations:is(:hover, :focus-within) .nav-disclosure {
-  display: block;
-}
-.header-cta {
-  color: var(--navy);
-  background: transparent;
-  border-color: #67776b;
 }
 .button {
   border-radius: 99px;
@@ -650,12 +606,6 @@ html {
 .compare-dock .button {
   min-height: 40px;
 }
-
-@media (min-width: 1191px) {
-  .header-inner {
-    width: min(1360px, calc(100% - 76px));
-  }
-}
 @media (max-width: 900px) {
   .country-mosaic {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -681,13 +631,6 @@ html {
   }
 }
 @media (max-width: 650px) {
-  .header-inner {
-    min-height: 63px;
-  }
-  .header-cta {
-    padding-inline: 10px;
-    min-height: 36px;
-  }
   .travel-hero-inner {
     min-height: 550px;
     align-items: start;

@@ -31,6 +31,7 @@ export function PackageCard({
           alt=""
           fill
           sizes="(max-width: 640px) 93vw, (max-width: 900px) 45vw, 30vw"
+          quality={85}
         />
         <span className={"pill level-" + item.level.toLowerCase()}>
           {item.level}

@@ -1,6 +1,6 @@
 # Jey Cee Tours
 
-Sitio informativo de viajes por Panamá y América. Incluye guías, catálogo de itinerarios ilustrativos, comparador, planificador con registro de interés y exportaciones PNG.
+Sitio informativo de viajes por Panamá y América. Incluye guías, catálogo de itinerarios ilustrativos, comparador y planificador con registro de interés.
 
 ## Desarrollo y despliegue
 
@@ -25,7 +25,7 @@ Para desplegar, importa el repositorio como proyecto Next.js en un proveedor com
 
 ## Catálogo y medios
 
-Los archivos `lib/destinations.ts` y `lib/packages.ts` contienen las guías y los itinerarios. Los presupuestos tentativos son ejemplos editoriales por persona sin inclusiones confirmadas. Para mostrar una tarifa comercial se requiere una fuente, importe, unidad, alcance de impuestos y cargos, y vigencia. Los formularios preparan un mensaje en el navegador y el visitante decide si lo comparte por WhatsApp o correo.
+Las guías y el catálogo están en `lib/destinations.ts` y `lib/packages.ts`. El archivo `lib/tour-details.ts` contiene el recorrido, las paradas y los servicios propuestos por tour. Los presupuestos tentativos son ejemplos editoriales por persona sin inclusiones confirmadas. Para mostrar una tarifa comercial se requiere una fuente, importe, unidad, alcance de impuestos y cargos, y vigencia. Los formularios preparan un mensaje en el navegador y el visitante decide si lo comparte por WhatsApp o correo.
 
 Los WebP de `public/images` son ilustraciones generadas de aspecto fotográfico. Sustituir por fotografías verificadas con licencia comercial documentada antes de usarlas como material documental. El símbolo SVG es un trazado del logo entregado por la marca.
 

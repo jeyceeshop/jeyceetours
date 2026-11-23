@@ -46,6 +46,7 @@ export function TravelHero() {
         alt=""
         fill
         sizes="100vw"
+        quality={85}
         preload={current === 0}
         className="travel-hero-image"
         style={{ objectPosition: scene.position }}
