@@ -61,8 +61,8 @@ export function TravelHero() {
             El mundo <em>te espera.</em>
           </h1>
           <p>
-            Islas, ciudades y naturaleza. Descubre rutas por Panamá y América y
-            encuentra la que va contigo.
+            Del Caribe panameño a las ciudades de América, descubre nuevos
+            destinos y planea un viaje a tu ritmo.
           </p>
           <div className="row">
             <a className="button primary" href="#destinos">
